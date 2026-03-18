@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PEPA · Automacao de Cotacoes</title>
+    <style>
+      :root {
+        --bg: #eef4f8;
+        --panel: rgba(255, 255, 255, 0.9);
+        --ink: #1f2937;
+        --muted: #64748b;
+        --blue: #0b62a4;
+        --green: #16a34a;
+        --orange: #ea580c;
+        --line: rgba(148, 163, 184, 0.22);
+        --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(11, 98, 164, 0.08), transparent 28%),
+          radial-gradient(circle at top right, rgba(34, 197, 94, 0.08), transparent 22%),
+          linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
+      }
+
+      .deck {
+        width: min(1180px, calc(100vw - 48px));
+        margin: 0 auto;
+        padding: 28px 0 60px;
+      }
+
+      .hero {
+        background: linear-gradient(135deg, #0b62a4 0%, #1290ce 100%);
+        color: white;
+        border-radius: 28px;
+        padding: 34px 38px;
+        box-shadow: var(--shadow);
+      }
+
+      .eyebrow {
+        margin: 0 0 10px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+        line-height: 1.05;
+      }
+
+      .hero p {
+        margin-top: 12px;
+        max-width: 860px;
+        font-size: 18px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.88);
+      }
+
+      .section {
+        margin-top: 26px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 30px 32px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .section h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .section > p {
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        border-radius: 24px;
+        background: white;
+        border: 1px solid var(--line);
+        padding: 22px;
+      }
+
+      .card h3 {
+        font-size: 19px;
+        margin-bottom: 10px;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      ul {
+        padding-left: 18px;
+        margin: 0;
+      }
+
+      .flow {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 22px;
+      }
+
+      .step {
+        border-radius: 24px;
+        overflow: hidden;
+        background: white;
+        border: 1px solid var(--line);
+      }
+
+      .step-head {
+        padding: 18px 20px 14px;
+      }
+
+      .step-head.blue {
+        background: rgba(11, 98, 164, 0.08);
+      }
+
+      .step-head.green {
+        background: rgba(34, 197, 94, 0.1);
+      }
+
+      .step-head.orange {
+        background: rgba(234, 88, 12, 0.1);
+      }
+
+      .step-title {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .step-head h3 {
+        margin-top: 8px;
+        font-size: 24px;
+      }
+
+      .step-head p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .shot {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-top: 1px solid var(--line);
+      }
+
+      .callout {
+        margin-top: 20px;
+        border-radius: 22px;
+        padding: 18px 20px;
+        background: #fff7ed;
+        border: 1px solid rgba(234, 88, 12, 0.18);
+        color: #9a3412;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+
+      .footer {
+        margin-top: 26px;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: center;
+      }
+
+      @media (max-width: 980px) {
+        .grid-3,
+        .grid-2,
+        .flow {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="deck">
+      <section class="hero">
+        <p class="eyebrow">PEPA · Automacao de Cotacoes</p>
+        <h1>Comparativo automatizado ligado ao ERP Flex</h1>
+        <p>
+          A proposta elimina a analise manual de PDFs recebidos por WhatsApp, compara as cotacoes contra o
+          espelho emitido no Flex, permite validacao operacional do comprador e devolve o resultado final ao ERP.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Problema e proposta</h2>
+        <p>
+          Hoje o comprador emite o espelho no Flex, envia aos fornecedores, recebe respostas em PDF e faz a
+          comparacao de forma manual. A automacao proposta organiza esse fluxo em uma superficie operacional unica
+          e prepara o retorno estruturado ao ERP.
+        </p>
+
+        <div class="grid grid-3" style="margin-top: 20px">
+          <article class="card">
+            <h3>Entrada</h3>
+            <ul>
+              <li>Espelho gerado no ERP Flex</li>
+              <li>Respostas dos fornecedores em PDF</li>
+              <li>Arquivos recebidos por WhatsApp</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Processamento</h3>
+            <ul>
+              <li>Parser de PDF com texto nativo</li>
+              <li>OCR apenas para anexos escaneados</li>
+              <li>Comparacao por item, preco, frete e pagamento</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Saida</h3>
+            <ul>
+              <li>Decisao do comprador em tela</li>
+              <li>Consolidado final do pedido</li>
+              <li>Retorno ao Flex por API, arquivo ou RPA</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Fluxo proposto para o comprador</h2>
+        <p>
+          O fluxo operacional foi estruturado em 3 telas: comparativo, validacao e consolidado final pronto para
+          integração com o Flex.
+        </p>
+
+        <div class="flow">
+          <article class="step">
+            <div class="step-head blue">
+              <p class="step-title">Etapa 1</p>
+              <h3>Comparativo</h3>
+              <p>Entrada dos anexos, fila OCR, ranking por fornecedor e melhor preco por item.</p>
+            </div>
+            <img class="shot" src="../previews/pepa-cotacoes-preview.png" alt="Tela de comparativo PEPA" />
+          </article>
+
+          <article class="step">
+            <div class="step-head green">
+              <p class="step-title">Etapa 2</p>
+              <h3>Validacao</h3>
+              <p>O comprador trata excecoes, confirma disponibilidade e escolhe o que pode seguir.</p>
+            </div>
+            <img class="shot" src="../previews/pepa-validacao-preview.png" alt="Tela de validacao PEPA" />
+          </article>
+
+          <article class="step">
+            <div class="step-head orange">
+              <p class="step-title">Etapa 3</p>
+              <h3>Pedido Final</h3>
+              <p>Pacote consolidado pronto para voltar ao ERP por API, arquivo estruturado ou RPA.</p>
+            </div>
+            <img class="shot" src="../previews/pepa-pedido-final-preview.png" alt="Tela de pedido final PEPA" />
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Integracao com o Flex</h2>
+        <p>
+          A arquitetura foi preparada para que a logica principal da automacao fique separada do conector do ERP.
+          Isso evita retrabalho enquanto a Flex confirma o modo de integração disponível.
+        </p>
+
+        <div class="grid grid-3" style="margin-top: 20px">
+          <article class="card">
+            <h3>API</h3>
+            <p>Melhor cenário. O sistema lê o espelho, grava a decisão do comprador e devolve o consolidado ao ERP.</p>
+          </article>
+          <article class="card">
+            <h3>Arquivo</h3>
+            <p>Plano intermediário. O Flex exporta o espelho e recebe de volta um Excel ou CSV com a decisão final.</p>
+          </article>
+          <article class="card">
+            <h3>RPA</h3>
+            <p>Plano de contingência. A automação preenche a interface do Flex quando não houver API nem importação.</p>
+          </article>
+        </div>
+
+        <div class="callout">
+          Recomendação técnica: construir primeiro o motor comparativo e a validação do comprador, e só então conectar
+          o Flex no modo que a própria fornecedora confirmar como viável.
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Próximos passos</h2>
+        <div class="grid grid-2" style="margin-top: 18px">
+          <article class="card">
+            <h3>Com a PEPA</h3>
+            <ul>
+              <li>Validar se o fluxo operacional está fiel ao processo do comprador</li>
+              <li>Confirmar as regras de aprovação e exceções antes do pedido final</li>
+              <li>Definir quem faz a validação final dentro do processo</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Com a Flex</h3>
+            <ul>
+              <li>Confirmar se existe API, importação por arquivo ou apenas operação por tela</li>
+              <li>Obter layout técnico do espelho e dos pontos de retorno ao ERP</li>
+              <li>Fechar o modelo de integração para implantação do MVP</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <p class="footer">Arquivo local de apresentação · `/Users/tiagotavares/reactive-saas/docs/pepa-executive-presentation.html`</p>
+    </main>
+  </body>
+</html>

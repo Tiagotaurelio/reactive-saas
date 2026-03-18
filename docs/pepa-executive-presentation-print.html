@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PEPA · Apresentacao Executiva PDF</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      * {
+        box-sizing: border-box;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Avenir Next", "Segoe UI", sans-serif;
+        color: #1f2937;
+        background: #eaf0f5;
+      }
+
+      .page {
+        width: 100%;
+        min-height: calc(297mm - 28mm);
+        page-break-after: always;
+        background: white;
+        border: 1px solid #dbe4ec;
+        border-radius: 18px;
+        padding: 22px 24px;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      .hero {
+        background: linear-gradient(135deg, #0b62a4 0%, #1290ce 100%);
+        color: white;
+        border-radius: 20px;
+        padding: 26px 28px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        opacity: 0.82;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 30px;
+        line-height: 1.08;
+      }
+
+      .hero p:last-child {
+        margin-top: 12px;
+        font-size: 15px;
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .section {
+        margin-top: 18px;
+      }
+
+      .section h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      .lead {
+        color: #64748b;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 16px;
+        background: #f8fafc;
+      }
+
+      .card h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+      }
+
+      .card p,
+      .card li {
+        color: #64748b;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .accent-blue {
+        border-left: 5px solid #0b62a4;
+      }
+
+      .accent-green {
+        border-left: 5px solid #16a34a;
+      }
+
+      .accent-orange {
+        border-left: 5px solid #ea580c;
+      }
+
+      .shot-wrap {
+        margin-top: 16px;
+        border: 1px solid #dbe4ec;
+        border-radius: 18px;
+        padding: 12px;
+        background: #f8fafc;
+      }
+
+      .shot {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
+      }
+
+      .caption {
+        margin-top: 10px;
+        color: #475569;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .strip {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .pill {
+        border-radius: 999px;
+        padding: 10px 14px;
+        font-size: 12px;
+        font-weight: 700;
+        text-align: center;
+      }
+
+      .pill.blue {
+        background: #dbeafe;
+        color: #0b62a4;
+      }
+
+      .pill.green {
+        background: #dcfce7;
+        color: #166534;
+      }
+
+      .pill.orange {
+        background: #ffedd5;
+        color: #c2410c;
+      }
+
+      .footer {
+        margin-top: 16px;
+        color: #94a3b8;
+        font-size: 11px;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="page">
+      <div class="hero">
+        <p class="eyebrow">PEPA · Automacao de Cotacoes</p>
+        <h1>Comparativo automatizado ligado ao ERP Flex</h1>
+        <p>
+          Proposta para eliminar a analise manual de cotações, comparar respostas de fornecedores contra o espelho do Flex e devolver o resultado aprovado ao ERP.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>Objetivo</h2>
+        <p class="lead">
+          Transformar um processo hoje operacional e manual em um fluxo estruturado, auditável e mais rápido para o comprador da PEPA.
+        </p>
+      </div>
+
+      <div class="section grid grid-3">
+        <article class="card accent-blue">
+          <h3>Entrada</h3>
+          <ul>
+            <li>Espelho emitido no Flex</li>
+            <li>PDFs recebidos dos fornecedores</li>
+            <li>Arquivos enviados por WhatsApp</li>
+          </ul>
+        </article>
+
+        <article class="card accent-green">
+          <h3>Processamento</h3>
+          <ul>
+            <li>Parser de PDF com texto</li>
+            <li>OCR só para anexos escaneados</li>
+            <li>Comparação por item, preço e condição comercial</li>
+          </ul>
+        </article>
+
+        <article class="card accent-orange">
+          <h3>Saída</h3>
+          <ul>
+            <li>Decisão do comprador em tela</li>
+            <li>Consolidado final do pedido</li>
+            <li>Retorno ao Flex por API, arquivo ou RPA</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section">
+        <h2>Fluxo executivo</h2>
+        <div class="strip">
+          <div class="pill blue">1. Comparativo automático</div>
+          <div class="pill green">2. Validação do comprador</div>
+          <div class="pill orange">3. Pedido final para o ERP</div>
+        </div>
+      </div>
+
+      <p class="footer">PEPA · Proposta executiva de automação</p>
+    </section>
+
+    <section class="page">
+      <div class="section">
+        <h2>Etapa 1 · Comparativo de cotações</h2>
+        <p class="lead">
+          A tela de comparativo centraliza anexos recebidos, identifica o que exige OCR e mostra a melhor leitura por fornecedor antes da validação final.
+        </p>
+      </div>
+
+      <div class="shot-wrap">
+        <img class="shot" src="../previews/pepa-cotacoes-preview.png" alt="Tela de comparativo" />
+        <p class="caption">
+          O comprador vê: arquivos recebidos, fila OCR, ranking por fornecedor, itens consolidados e a transição para a próxima etapa de validação.
+        </p>
+      </div>
+
+      <div class="section grid grid-2">
+        <article class="card">
+          <h3>O que resolve</h3>
+          <p>Reduz o tempo gasto comparando PDFs manualmente e padroniza a leitura das respostas de fornecedores.</p>
+        </article>
+        <article class="card">
+          <h3>Ligação com o Flex</h3>
+          <p>O espelho do ERP continua sendo a referência principal dos itens e quantidades a serem comparados.</p>
+        </article>
+      </div>
+
+      <p class="footer">Página 2 · Comparativo</p>
+    </section>
+
+    <section class="page">
+      <div class="section">
+        <h2>Etapa 2 · Validação do comprador</h2>
+        <p class="lead">
+          Depois do comparativo, o comprador trata exceções, confirma disponibilidade e decide o que pode seguir para o pedido final.
+        </p>
+      </div>
+
+      <div class="shot-wrap">
+        <img class="shot" src="../previews/pepa-validacao-preview.png" alt="Tela de validacao" />
+        <p class="caption">
+          A tela evidencia alertas, fechamento por fornecedor e a grade final por item, incluindo pendências antes da liberação.
+        </p>
+      </div>
+
+      <div class="section grid grid-2">
+        <article class="card">
+          <h3>O que o comprador valida</h3>
+          <p>Disponibilidade, frete, pagamento, divergências e qualquer item que ainda não possa ser liberado para pedido.</p>
+        </article>
+        <article class="card">
+          <h3>Governança</h3>
+          <p>O sistema deixa claro o que está aprovado, o que está pendente e quem precisa agir antes de gerar o pedido final.</p>
+        </article>
+      </div>
+
+      <p class="footer">Página 3 · Validação</p>
+    </section>
+
+    <section class="page">
+      <div class="section">
+        <h2>Etapa 3 · Pedido final pronto para o Flex</h2>
+        <p class="lead">
+          A decisão aprovada vira um pacote final estruturado, preparado para integrar com o ERP no formato viável: API, arquivo ou RPA.
+        </p>
+      </div>
+
+      <div class="shot-wrap">
+        <img class="shot" src="../previews/pepa-pedido-final-preview.png" alt="Tela de pedido final" />
+        <p class="caption">
+          O comprador enxerga o consolidado final, o conector escolhido para o Flex e a grade exportável das linhas do pedido.
+        </p>
+      </div>
+
+      <div class="section grid grid-3">
+        <article class="card accent-blue">
+          <h3>API</h3>
+          <p>Melhor cenário. Leitura e escrita estruturada diretamente no ERP.</p>
+        </article>
+        <article class="card accent-green">
+          <h3>Arquivo</h3>
+          <p>Plano intermediário. Exporta e reimporta o resultado via Excel ou CSV.</p>
+        </article>
+        <article class="card accent-orange">
+          <h3>RPA</h3>
+          <p>Plano de contingência quando o Flex só permitir operação por tela.</p>
+        </article>
+      </div>
+
+      <p class="footer">Página 4 · Pedido final</p>
+    </section>
+
+    <section class="page">
+      <div class="section">
+        <h2>Próximos passos com a PEPA e a Flex</h2>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Com a PEPA</h3>
+          <ul>
+            <li>Validar se as 3 telas representam o processo real do comprador</li>
+            <li>Fechar regras de exceção e aprovação antes do pedido</li>
+            <li>Definir responsáveis pela validação final</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Com a Flex</h3>
+          <ul>
+            <li>Confirmar se existe API, arquivo de ida e volta ou apenas operação por tela</li>
+            <li>Receber layout técnico do espelho e dos pontos de retorno</li>
+            <li>Escolher o conector final da implantação</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="section">
+        <div class="card accent-orange">
+          <h3>Recomendação</h3>
+          <p>
+            Construir primeiro o motor comparativo e a validação do comprador, e conectar o Flex no modo que a fornecedora confirmar como viável. Isso preserva a inteligência da automação e reduz retrabalho técnico.
+          </p>
+        </div>
+      </div>
+
+      <p class="footer">Página 5 · Próximos passos</p>
+    </section>
+  </body>
+</html>
