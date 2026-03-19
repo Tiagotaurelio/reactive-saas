@@ -80,6 +80,13 @@ Variaveis opcionais:
 - Healthcheck publico: `https://reactive.tavarestech.cloud/api/health`
 - Workflow agendado de healthcheck: [public-healthcheck.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-healthcheck.yml)
 - Workflow agendado de smoke funcional: [public-smoke.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-smoke.yml)
+- Webhook opcional de alerta: secret `ALERT_WEBHOOK_URL`
+
+## Producao separada
+
+- Workflow de deploy dedicado: [deploy-production.yml](/Users/tiagotavares/reactive-saas/.github/workflows/deploy-production.yml)
+- Dominio de producao via secret `REACTIVE_PUBLIC_DOMAIN`
+- Recomendado usar GitHub Environment `production`
 
 ## Observacoes
 

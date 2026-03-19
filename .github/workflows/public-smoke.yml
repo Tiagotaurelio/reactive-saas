@@ -16,3 +16,9 @@ jobs:
           APP_URL: https://reactive.tavarestech.cloud
         run: |
           sh ./scripts/post-deploy-smoke.sh
+      - name: Notify failure webhook
+        if: failure() && secrets.ALERT_WEBHOOK_URL != ''
+        run: |
+          curl -fsS -X POST "${{ secrets.ALERT_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"app\":\"reactive-saas\",\"workflow\":\"public-smoke\",\"status\":\"failure\",\"url\":\"https://reactive.tavarestech.cloud\"}"

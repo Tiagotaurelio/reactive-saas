@@ -1,0 +1,84 @@
+name: Deploy ReActive to Production
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Copy project to production host
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "."
+          target: ${{ secrets.REACTIVE_DEPLOY_PATH }}
+          overwrite: true
+          rm: false
+
+      - name: Deploy production container
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            set -eu
+            DEPLOY_PATH="${{ secrets.REACTIVE_DEPLOY_PATH }}"
+            PUBLIC_DOMAIN="${{ secrets.REACTIVE_PUBLIC_DOMAIN }}"
+            if [ -z "$PUBLIC_DOMAIN" ]; then
+              PUBLIC_DOMAIN="reactive.tavarestech.cloud"
+            fi
+            mkdir -p "$DEPLOY_PATH/data"
+            cat > "$DEPLOY_PATH/.env" <<'EOF'
+            DATABASE_URL=${{ secrets.REACTIVE_DATABASE_URL }}
+            DATABASE_SSL=${{ secrets.REACTIVE_DATABASE_SSL }}
+            REACTIVE_DATA_DIR=/app/data
+            EOF
+            cd "$DEPLOY_PATH"
+            docker build -t reactive-saas:latest .
+            docker rm -f reactive-saas-prod || true
+            docker run -d \
+              --name reactive-saas-prod \
+              --restart unless-stopped \
+              --env-file "$DEPLOY_PATH/.env" \
+              --network easypanel \
+              -v "$DEPLOY_PATH/data:/app/data" \
+              -p 3200:3000 \
+              reactive-saas:latest
+            TRAEFIK_CONTAINER="$(docker ps --filter name=traefik --format '{{.Names}}' | head -n 1)"
+            if [ -n "$TRAEFIK_CONTAINER" ]; then
+              docker exec "$TRAEFIK_CONTAINER" sh -lc "cat > /data/config/reactive-production.yml <<EOF
+            http:
+              routers:
+                reactive-production-http:
+                  rule: Host(\"$PUBLIC_DOMAIN\")
+                  entryPoints:
+                    - http
+                  middlewares:
+                    - redirect-to-https
+                  service: reactive-production-service
+                reactive-production-https:
+                  rule: Host(\"$PUBLIC_DOMAIN\")
+                  entryPoints:
+                    - https
+                  tls:
+                    certResolver: letsencrypt
+                  service: reactive-production-service
+              middlewares:
+                redirect-to-https:
+                  redirectScheme:
+                    scheme: https
+              services:
+                reactive-production-service:
+                  loadBalancer:
+                    servers:
+                      - url: http://reactive-saas-prod:3000
+            EOF"
+            fi

@@ -42,6 +42,7 @@ Arquivo base:
 Workflow pronto:
 
 - [deploy-hostinger.yml](/Users/tiagotavares/reactive-saas/.github/workflows/deploy-hostinger.yml)
+- [deploy-production.yml](/Users/tiagotavares/reactive-saas/.github/workflows/deploy-production.yml)
 - [public-healthcheck.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-healthcheck.yml)
 - [public-smoke.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-smoke.yml)
 
@@ -53,6 +54,8 @@ Secrets esperados no GitHub:
 - `REACTIVE_DEPLOY_PATH`
 - `REACTIVE_DATABASE_URL`
 - `REACTIVE_DATABASE_SSL`
+- `REACTIVE_PUBLIC_DOMAIN`
+- `ALERT_WEBHOOK_URL`
 
 ## Healthcheck
 
