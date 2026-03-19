@@ -75,6 +75,12 @@ Variaveis opcionais:
 - `REACTIVE_SMOKE_EMAIL`
 - `REACTIVE_SMOKE_PASSWORD`
 
+## Monitoramento
+
+- Healthcheck publico: `https://reactive.tavarestech.cloud/api/health`
+- Workflow agendado de healthcheck: [public-healthcheck.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-healthcheck.yml)
+- Workflow agendado de smoke funcional: [public-smoke.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-smoke.yml)
+
 ## Observacoes
 
 - O app esta em `Next 16`

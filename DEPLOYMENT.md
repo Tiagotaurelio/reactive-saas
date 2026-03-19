@@ -42,6 +42,8 @@ Arquivo base:
 Workflow pronto:
 
 - [deploy-hostinger.yml](/Users/tiagotavares/reactive-saas/.github/workflows/deploy-hostinger.yml)
+- [public-healthcheck.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-healthcheck.yml)
+- [public-smoke.yml](/Users/tiagotavares/reactive-saas/.github/workflows/public-smoke.yml)
 
 Secrets esperados no GitHub:
 
@@ -75,6 +77,11 @@ Se o ambiente usar credenciais diferentes, sobrescreva:
 ```bash
 REACTIVE_SMOKE_EMAIL=operacao@example.com REACTIVE_SMOKE_PASSWORD=segredo APP_URL=https://seu-ambiente.example.com npm run smoke:deploy
 ```
+
+## Monitoramento
+
+- healthcheck publico a cada 15 minutos via GitHub Actions
+- smoke funcional diario contra `https://reactive.tavarestech.cloud`
 
 ## Inicio em producao
 
