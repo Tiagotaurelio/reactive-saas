@@ -16,8 +16,11 @@ jobs:
         run: |
           curl -fsS https://reactive.tavarestech.cloud/demo >/dev/null
       - name: Notify failure webhook
-        if: failure() && secrets.ALERT_WEBHOOK_URL != ''
+        if: failure()
+        env:
+          ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
         run: |
-          curl -fsS -X POST "${{ secrets.ALERT_WEBHOOK_URL }}" \
+          [ -n "$ALERT_WEBHOOK_URL" ] || exit 0
+          curl -fsS -X POST "$ALERT_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             -d "{\"app\":\"reactive-saas\",\"workflow\":\"public-healthcheck\",\"status\":\"failure\",\"url\":\"https://reactive.tavarestech.cloud/api/health\"}"
